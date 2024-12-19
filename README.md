@@ -41,32 +41,6 @@ Recipe Bay is a modern, user-friendly platform designed to connect food enthusia
    ```bash
    npm run dev
    ```
-
-## 📁 Project Structure
-
-```
-recipe-bay/
-├── src/
-│   ├── components/
-│   │   ├── AboutSection.tsx
-│   │   ├── CategoryFilter.tsx
-│   │   ├── FeaturedSection.tsx
-│   │   ├── Header.tsx
-│   │   ├── Hero.tsx
-│   │   ├── Logo.tsx
-│   │   ├── RecipeCard.tsx
-│   │   └── RecipeGrid.tsx
-│   ├── hooks/
-│   │   └── useRecipes.ts
-│   ├── services/
-│   │   └── api.ts
-│   ├── types/
-│   │   └── index.ts
-│   ├── App.tsx
-│   └── main.tsx
-└── [Configuration files...]
-```
-
 ## 🎨 Features & Components
 
 - **Responsive Design**: Fully responsive layout that works on all devices
@@ -114,6 +88,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 👥 Authors
 
 - Initial work - [Beloveyeboah](https://github.com/Beloveyeboah)
+-[Fredrick] (https://github.com/Freddiecoder99)
 
 ## 🙏 Acknowledgments
 
