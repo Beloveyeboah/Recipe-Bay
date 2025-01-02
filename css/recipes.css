@@ -1,0 +1,50 @@
+@import 'variables.css';
+
+.recipe-card {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform var(--transition-speed);
+}
+
+.recipe-card:hover {
+  transform: translateY(-5px);
+}
+
+.recipe-image {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+}
+
+.recipe-content {
+  padding: 1.5rem;
+}
+
+.recipe-content h3 {
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+.recipe-content p {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.recipe-details {
+  display: flex;
+  gap: 1rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.recipe-time, .recipe-servings {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.recipe-time i, .recipe-servings i {
+  color: var(--primary-color);
+}
