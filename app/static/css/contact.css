@@ -1,0 +1,212 @@
+/* General Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+header.hero {
+    background: url('/static/images/hero-background.jpg') no-repeat center center/cover;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    position: relative;
+}
+
+header.hero:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+header.hero .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+header.hero .nav .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+header.hero .nav .nav-links a {
+    color: #fff;
+    margin: 0 1rem;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+header.hero .nav .auth-buttons a {
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    text-decoration: none;
+    color: #fff;
+}
+
+header.hero .nav .auth-buttons .btn-signin {
+    background: transparent;
+    border: 1px solid #fff;
+}
+
+header.hero .nav .auth-buttons .btn-primary {
+    background: #ff5a5f;
+    border: none;
+}
+
+header.hero .hero-content {
+    z-index: 1;
+    position: relative;
+    padding: 2rem;
+}
+
+header.hero .hero-content h1 {
+    font-size: 2.5rem;
+    margin: 0.5rem 0;
+}
+
+header.hero .hero-content p {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+}
+
+/* Contact Section Styles */
+.contact-section {
+    padding: 4rem 2rem;
+    background: #f7f7f7;
+}
+
+.contact-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.contact-section p {
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+}
+
+.contact-section .profiles {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.contact-section .profile {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 250px;
+}
+
+.contact-section .profile img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+.contact-section .profile h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-section .profile p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.contact-section .profile .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.contact-section .social-links a {
+    color: #333;
+    text-decoration: none;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+
+.contact-section .social-links a .social-icon {
+    font-size: 1.5rem;
+    color: #ff5a5f;
+}
+
+.contact-section .social-links a:hover .social-icon {
+    color: #e14e50;
+}
+
+/* Footer Styles */
+footer {
+    background: #333;
+    color: #fff;
+    padding: 2rem;
+    text-align: center;
+}
+
+footer .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer .footer-section {
+    flex: 1;
+    min-width: 200px;
+}
+
+footer .footer-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+footer .footer-links a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+footer .social-links a {
+    color: #fff;
+    margin: 0 0.5rem;
+    font-size: 1.5rem;
+}
+
+footer .footer-bottom {
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    color: #aaa;
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - Recipe Bay</title>
+    <link rel="stylesheet" href="/static/css/contact.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="hero">
+        <nav class="nav">
+            <div class="logo">
+                <i class="fas fa-utensils logo-icon"></i>
+                Recipe Bay
+            </div>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="{{ url_for('main.about') }}">About</a>
+                <a href="#discover">Recipes</a>
+            </div>
+        </nav>
+        <div class="hero-content">
+            <h1>Contact Us</h1>
+            <p>We'd love to hear from you</p>
+        </div>
+    </header>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <p>Connect with our developers through their social profiles.</p>
+            <div class="profiles">
+                <div class="profile">
+                    <img src="/static/images/developer1.jpg" alt="Developer 1">
+                    <h3>Fredrick Bundi</h3>
+                    <p>Frontend Developer</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/developer1" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook social-icon"></i>
+                        </a>
+                        <a href="mailto:developer1@example.com" aria-label="Email">
+                            <i class="fas fa-envelope social-icon"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/developer1" target="_blank" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin social-icon"></i>
+                        </a>
+                        <a href="https://github.com/Freddiecoder99" target="_blank" aria-label="GitHub">
+                            <i class="fab fa-github social-icon"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="profile">
+                    <img src="/static/images/developer2.jpg" alt="Beloveyeboah">
+                    <h3>Osei Yeboah Isaac</h3>
+                    <p>Backend Developer</p>
+                    <div class="social-links">
+                        <a href="https://https://facebook.com/belove.yeboah" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook social-icon"></i>
+                        </a>
+                        <a href="mailto:beloveyeboah@gmail.com" aria-label="Email">
+                            <i class="fas fa-envelope social-icon"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/beloveyeboah" target="_blank" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin social-icon"></i>
+                        </a>
+                        <a href="https://github.com/Beloveyeboah" target="_blank" aria-label="GitHub">
+                            <i class="fab fa-github social-icon"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Recipe Bay</h3>
+                <p>Your culinary journey starts here</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <div class="footer-links">
+                    <a href="{{ url_for('main.about') }}">About Us</a>
+                    <a href="#contact">Contact</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter">
+                        <i class="fab fa-twitter social-icon"></i>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <i class="fab fa-instagram social-icon"></i>
+                    </a>
+                    <a href="#" aria-label="Facebook">
+                        <i class="fab fa-facebook social-icon"></i>
+                    </a>
+                    <a href="#" aria-label="Pinterest">
+                        <i class="fab fa-pinterest social-icon"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Recipe Bay. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
