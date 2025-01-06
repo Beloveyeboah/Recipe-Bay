@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Recipes - Recipe Bay</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script type="module" src="/static/js/main.js"></script>
+</head>
+<body>
+    <header class="hero">
+        <nav class="nav">
+            <div class="logo">
+                <i class="fas fa-utensils logo-icon"></i>
+                Recipe Bay
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('main.about') }}">About</a>
+                <a href="{{ url_for('main.all_recipes') }}">Recipes</a>
+                <a href="{{ url_for('main.contact') }}">Contact</a>
+                <div class="auth-buttons">
+                    <a href="{{ url_for('main.login') }}" class="btn-signin">Sign In</a>
+                    <a href="{{ url_for('main.register') }}" class="btn-primary">Sign Up</a>
+                </div>
+            </div>
+        </nav>
+        <div class="hero-content">
+            <h1>Discover All Recipes</h1>
+            <p>Browse through our extensive collection of delicious recipes</p>
+            <div class="add-recipe">
+                <a href="{{ url_for('main.new_recipe') }}" class="btn-primary">Add Recipe</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="all-recipes" class="all-recipes">
+        <h2>All Recipes</h2>
+        <div class="recipe-grid">
+            {% for recipe in recipes %}
+            <div class="recipe-card">
+                <img src="{{ recipe.image_file }}" alt="{{ recipe.title }}" class="recipe-image">
+                <h3>{{ recipe.title }}</h3>
+                <p>{{ recipe.content }}</p>
+                <p>Likes: {{ recipe.likes|length }}</p>
+                <a href="{{ url_for('main.recipe', recipe_id=recipe.id) }}" class="btn-view">View Recipe</a>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="pagination">
+            {% if current_page > 1 %}
+            <a href="{{ url_for('main.all_recipes', page=current_page-1) }}">&laquo; Prev</a>
+            {% endif %}
+            {% if current_page < total_pages %}
+            <a href="{{ url_for('main.all_recipes', page=current_page+1) }}">Next &raquo;</a>
+            {% endif %}
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Recipe Bay</h3>
+                <p>Your culinary journey starts here</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <div class="footer-links">
+                    <a href="{{ url_for('main.about') }}">About Us</a>
+                    <a href="{{ url_for('main.contact') }}">Contact</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter">
+                        <i class="fab fa-twitter social-icon"></i>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <i class="fab fa-instagram social-icon"></i>
+                    </a>
+                    <a href="#" aria-label="Facebook">
+                        <i class="fab fa-facebook social-icon"></i>
+                    </a>
+                    <a href="#" aria-label="Pinterest">
+                        <i class="fab fa-pinterest social-icon"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Recipe Bay. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('search-button').addEventListener('click', function() {
+            const query = document.getElementById('search-input').value;
+            window.location.href = `/all_recipes?search=${query}`;
+        });
+
+        const likeButtons = document.querySelectorAll('.btn-like');
+        likeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const recipeId = this.getAttribute('data-id');
+                fetch(`/recipe/${recipeId}/like`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': "{{ csrf_token() }}"
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        alert('Recipe liked!');
+                    } else {
+                        alert('You have already liked this recipe.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

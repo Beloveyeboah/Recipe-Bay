@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ recipe.title }} - Recipe Bay</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script type="module" src="/static/js/main.js"></script>
+</head>
+<body style="font-family: 'Arial', sans-serif; background: #f4f4f4; color: #333; margin: 0; padding: 0;">
+    <header class="hero" style="background: #333; color: #fff; padding: 1rem 0;">
+        <nav class="nav" style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: auto;">
+            <div class="logo" style="font-size: 1.5rem; font-weight: bold;">
+                <i class="fas fa-utensils logo-icon" style="color: #fff; margin-right: 0.5rem;"></i>
+                Recipe Bay
+            </div>
+            <div class="nav-links" style="display: flex; gap: 1rem;">
+                <a href="{{ url_for('main.home') }}" style="color: #fff; text-decoration: none;">Home</a>
+                <a href="{{ url_for('main.about') }}" style="color: #fff; text-decoration: none;">About</a>
+                <a href="{{ url_for('main.contact') }}" style="color: #fff; text-decoration: none;">Contact</a>
+                <div class="auth-buttons" style="display: flex; gap: 1rem;">
+                    {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('main.new_recipe') }}" class="btn-primary" style="background: #ff6347; color: #fff; padding: 0.5rem 1rem; text-decoration: none; border-radius: 5px;">Add Recipe</a>
+                    <a href="{{ url_for('main.logout') }}" class="btn-signout" style="background: #ff6347; color: #fff; padding: 0.5rem 1rem; text-decoration: none; border-radius: 5px;">Sign Out</a>
+                    {% else %}
+                    <a href="{{ url_for('main.login') }}" class="btn-signin" style="background: #ff6347; color: #fff; padding: 0.5rem 1rem; text-decoration: none; border-radius: 5px;">Sign In</a>
+                    <a href="{{ url_for('main.register') }}" class="btn-primary" style="background: #ff6347; color: #fff; padding: 0.5rem 1rem; text-decoration: none; border-radius: 5px;">Sign Up</a>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="recipe-details" style="max-width: 800px; margin: auto; padding: 2rem;">
+        <div class="recipe-card" style="background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s;">
+            <img src="{{ url_for('static', filename='images/' + recipe.image_file) }}" alt="{{ recipe.title }}" class="recipe-image" style="width: 100%; height: auto; border-bottom: 1px solid #ddd;">
+            <div class="recipe-content" style="padding: 1.5rem;">
+                <h2 style="margin-bottom: 0.5rem; color: #ff6347;">{{ recipe.title }}</h2>
+                <p>By {{ recipe.author.username }} - {{ recipe.date_posted.strftime('%B %d, %Y') }}</p>
+                <p>{{ recipe.content }}</p>
+                <div class="recipe-meta" style="display: flex; gap: 1rem; color: #666; font-size: 0.9rem; margin-bottom: 1rem;">
+                    <p>Likes: {{ recipe.likes|length }}</p>
+                    <p>Hates: {{ recipe.hates|length }}</p>
+                </div>
+                <div class="recipe-actions" style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                    <button class="btn-like" data-id="{{ recipe.id }}" style="padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; background-color: #ff6347; color: #fff;">Like</button>
+                    <button class="btn-hate" data-id="{{ recipe.id }}" style="padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; background-color: #ff6347; color: #fff;">Hate</button>
+                    <button class="btn-follow" data-id="{{ recipe.author.id }}" style="padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; background-color: #ff6347; color: #fff;">Follow</button>
+                    <button class="btn-share" style="padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; background-color: #ff6347; color: #fff;">Share</button>
+                </div>
+                <div class="recipe-comments" style="margin-top: 2rem;">
+                    <h3>Comments</h3>
+                    {% for comment in recipe.comments %}
+                    <div class="comment" style="margin-bottom: 1rem;">
+                        <p><strong>{{ comment.author.username }}</strong> - {{ comment.date_posted.strftime('%B %d, %Y') }}</p>
+                        <p>{{ comment.content }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+                <form action="{{ url_for('main.add_comment', recipe_id=recipe.id) }}" method="POST" style="margin-top: 1rem;">
+                    {{ form.hidden_tag() }}
+                    <textarea name="comment" placeholder="Add a comment..." required style="width: 100%; padding: 1rem; border-radius: 5px; border: 1px solid #ddd; margin-bottom: 1rem;"></textarea>
+                    <button type="submit" class="btn-primary" style="background: #ff6347; color: #fff; padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer;">Submit</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background: #333; color: #fff; padding: 2rem 1rem;">
+        <div class="footer-content" style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; max-width: 1200px; margin: auto;">
+            <div class="footer-section" style="flex: 1; min-width: 200px;">
+                <h3>Recipe Bay</h3>
+                <p>Your culinary journey starts here</p>
+            </div>
+            <div class="footer-section" style="flex: 1; min-width: 200px;">
+                <h3>Quick Links</h3>
+                <div class="footer-links" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <a href="{{ url_for('main.about') }}" style="color: #fff; text-decoration: none;">About Us</a>
+                    <a href="{{ url_for('main.contact') }}" style="color: #fff; text-decoration: none;">Contact</a>
+                    <a href="#" style="color: #fff; text-decoration: none;">Terms of Service</a>
+                    <a href="#" style="color: #fff; text-decoration: none;">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="footer-section" style="flex: 1; min-width: 200px;">
+                <h3>Connect</h3>
+                <div class="social-links" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <a href="#" aria-label="Twitter" style="color: #fff; text-decoration: none;">
+                        <i class="fab fa-twitter social-icon" style="margin-right: 0.5rem;"></i>Twitter
+                    </a>
+                    <a href="#" aria-label="Instagram" style="color: #fff; text-decoration: none;">
+                        <i class="fab fa-instagram social-icon" style="margin-right: 0.5rem;"></i>Instagram
+                    </a>
+                    <a href="#" aria-label="Pinterest" style="color: #fff; text-decoration: none;">
+                        <i class="fab fa-pinterest social-icon" style="margin-right: 0.5rem;"></i>Pinterest
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom" style="text-align: center; margin-top: 2rem; border-top: 1px solid #444; padding-top: 1rem; font-size: 0.8rem;">
+            <p>&copy; 2024 Recipe Bay. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const likeButtons = document.querySelectorAll('.btn-like');
+        likeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const recipeId = this.getAttribute('data-id');
+                fetch(`/recipe/${recipeId}/like`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': "{{ csrf_token() }}"
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        alert('Recipe liked!');
+                    } else {
+                        alert('You have already liked this recipe.');
+                    }
+                });
+            });
+        });
+
+        const hateButtons = document.querySelectorAll('.btn-hate');
+        hateButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const recipeId = this.getAttribute('data-id');
+                fetch(`/recipe/${recipeId}/hate`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': "{{ csrf_token() }}"
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        alert('Recipe hated.');
+                    } else {
+                        alert('You have already hated this recipe.');
+                    }
+                });
+            });
+        });
+
+        const followButtons = document.querySelectorAll('.btn-follow');
+        followButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const userId = this.getAttribute('data-id');
+                fetch(`/follow/${userId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': "{{ csrf_token() }}"
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        alert('User followed!');
+                    } else {
+                        alert('You are already following this user.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

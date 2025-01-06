@@ -17,7 +17,7 @@
             </div>
             <div class="nav-links">
                 <a href="{{ url_for('main.about') }}">About</a>
-                <a href="#discover">Recipes</a>
+                <a href="{{ url_for('main.all_recipes') }}">Recipes</a>
                 <a href="{{ url_for('main.contact') }}">Contact</a>
                 <div class="auth-buttons">
                     <a href="{{ url_for('main.login') }}" class="btn-signin">Sign In</a>
@@ -35,6 +35,21 @@
         </div>
     </header>
 
+    <section id="featured" class="featured">
+        <h2>Featured Recipes</h2>
+        <div class="recipe-grid">
+            {% for recipe in featured_recipes %}
+            <div class="recipe-card">
+                <img src="{{ recipe.image_file }}" alt="{{ recipe.title }}" class="recipe-image">
+                <h3>{{ recipe.title }}</h3>
+                <p>By {{ recipe.author.username }} - {{ recipe.date_posted.strftime('%B %d, %Y') }}</p>
+                <p>Likes: {{ recipe.likes|length }}</p>
+                <a href="{{ url_for('main.recipe', recipe_id=recipe.id) }}" class="btn-view">View Recipe</a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
     <section id="discover" class="discover">
         <h2>Discover Recipes</h2>
         <div class="category-tabs">
@@ -48,12 +63,12 @@
         </div>
 
         <div class="recipe-grid">
-            <!-- Recipe cards will be rendered here -->
             {% for recipe in recipes %}
             <div class="recipe-card">
+                <img src="{{ recipe.image_file }}" alt="{{ recipe.title }}" class="recipe-image">
                 <h3>{{ recipe.title }}</h3>
-                <p>{{ recipe.content }}</p>
-                <button class="btn-like" data-id="{{ recipe.id }}">Like</button>
+                <p>Likes: {{ recipe.likes|length }}</p>
+                <a href="{{ url_for('main.recipe', recipe_id=recipe.id) }}" class="btn-view">View Recipe</a>
             </div>
             {% endfor %}
         </div>
@@ -100,27 +115,7 @@
     <script>
         document.getElementById('search-button').addEventListener('click', function() {
             const query = document.getElementById('search-input').value;
-            window.location.href = `/home?search=${query}`;
-        });
-
-        const likeButtons = document.querySelectorAll('.btn-like');
-        likeButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const recipeId = this.getAttribute('data-id');
-                fetch(`/recipe/${recipeId}/like`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': "{{ csrf_token() }}"
-                    }
-                }).then(response => {
-                    if (response.ok) {
-                        alert('Recipe liked!');
-                    } else {
-                        alert('You have already liked this recipe.');
-                    }
-                });
-            });
+            window.location.href = `/all_recipes?search=${query}`;
         });
     </script>
 </body>
